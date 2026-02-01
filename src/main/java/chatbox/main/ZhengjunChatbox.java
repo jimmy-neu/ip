@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * This add level-6 delete functionalities and its possible respective errors.
+ * Use Enums.
  */
 
 public class ZhengjunChatbox {
@@ -27,91 +27,95 @@ public class ZhengjunChatbox {
             }
 
             try {
-                String[] parts = input.split(" ", 2); // Split the command from the rest of the string
-                String command = parts[0];
-
-                if (command.equals("list")) {
-                    System.out.println(horizontalLine + "\nHere are the tasks in your list:");
-                    for (int i = 0; i < taskList.size(); i++) {
-                        System.out.println((i + 1) + "." + taskList.get(i));
-                    }
-                    System.out.println(horizontalLine);
-
-                } else if (command.equals("mark") || command.equals("unmark")) {
-                    // ERROR: Check if task number is provided
-                    if (parts.length < 2) {
-                        throw new ChatBoxException("I am really happy to help u update the list but can't do it without you specifying the number. Please specify the task number to " + command + ".");
-                    }
-                    int index = Integer.parseInt(parts[1]) - 1;
-
-                    if (command.equals("mark")) {
-                        taskList.get(index).markAsDone();
-                        System.out.println(horizontalLine + "\nNice! I've marked this task as done:\n  "
-                                + taskList.get(index) + "\n" + horizontalLine);
-                    } else {
-                        taskList.get(index).unmarkAsDone();
-                        System.out.println(horizontalLine + "\nOK, I've marked this task as not done yet:\n  "
-                                + taskList.get(index) + "\n" + horizontalLine);
-                    }
-
-                } else if (command.equals("todo")) {
-                    // ERROR: Check if description is empty
-                    if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                        throw new ChatBoxException("I am willing to help but what stuff is to do. The description of a todo cannot be empty.");
-                    }
-                    Task newTask = new ToDo(parts[1]);
-                    taskList.add(newTask);
-                    System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTask
-                            + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
-
-                } else if (command.equals("deadline")) {
-                    // ERROR: Check for description and /by
-                    if (parts.length < 2 || !parts[1].contains(" /by ")) {
-                        throw new ChatBoxException("I am willing to help and date is important for a deadline.Hence, a deadline must have a description and a /by time.");
-                    }
-                    // Split the input into smaller parts
-                    // For instance, "return book /by Sunday" can be splited into ["return book", "Sunday"]
-                    String[] deadlineParts = parts[1].split(" /by ");
-                    Task newTask = new Deadline(deadlineParts[0], deadlineParts[1]);
-                    taskList.add(newTask);
-                    System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTask
-                            + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
-
-                } else if (command.equals("event")) {
-                    // ERROR: Check for /from and /to
-                    if (parts.length < 2 || !parts[1].contains(" /from ") || !parts[1].contains(" /to ")) {
-                        throw new ChatBoxException("I am willing to help and date is important for an event. Hence, an event must have a /from and a /to time.");
-                    }
-                    String[] eventParts = parts[1].split(" /from ");
-                    String[] timeParts = eventParts[1].split(" /to ");
-                    Task newTask = new Event(eventParts[0], timeParts[0], timeParts[1]);
-                    taskList.add(newTask);
-                    System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTask
-                            + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
-
-                } else if (command.equals("delete")) { // Level 6
-                    if (parts.length < 2 || parts[1].trim().isEmpty()) {
-                        throw new ChatBoxException("I am eager to help you clean up, but I need a number! Please specify which task number to delete.");
-                    }
-                    int index = Integer.parseInt(parts[1]) - 1;
-                    if (index < 0 || index >= taskList.size()) {
-                        throw new ChatBoxException("That task number does not exist. Make sure you cross the right item.");
-                    }
-                    Task removedTask = taskList.get(index);
-                    taskList.remove(index);
-                    System.out.println(horizontalLine + "\n Noted. I've removed this task:\n   "
-                            + removedTask + "\n Now you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
-                } else {
-                    // ERROR: Unknown command
+                String[] parts = input.split(" ", 2);
+                // Convert the first word to an Enum constant (case-insensitive)
+                Command cmd;
+                try {
+                    cmd = Command.valueOf(parts[0].toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    // This flags any command that isn't in our Enum list
                     throw new ChatBoxException("I am willing to help and I'm sorry, but I don't know what that means :-(. Could you be more specific");
+                }
+                // Use switch instead of if-else statements
+                switch (cmd) {
+                    case LIST:
+                        System.out.println(horizontalLine + "\nHere are the tasks in your list:");
+                        for (int i = 0; i < taskList.size(); i++) {
+                            System.out.println((i + 1) + "." + taskList.get(i));
+                        }
+                        System.out.println(horizontalLine);
+                        break;
+
+                    case MARK:
+                    case UNMARK:
+                        if (parts.length < 2) {
+                            throw new ChatBoxException("I am really happy to help u update the list but can't do it without you specifying the number. Please specify the task number.");
+                        }
+                        int markIndex = Integer.parseInt(parts[1]) - 1;
+                        if (cmd == Command.MARK) {
+                            taskList.get(markIndex).markAsDone();
+                            System.out.println(horizontalLine + "\nNice! I've marked this task as done:\n  "
+                                    + taskList.get(markIndex) + "\n" + horizontalLine);
+                        } else {
+                            taskList.get(markIndex).unmarkAsDone();
+                            System.out.println(horizontalLine + "\nOK, I've marked this task as not done yet:\n  "
+                                    + taskList.get(markIndex) + "\n" + horizontalLine);
+                        }
+                        break;
+
+                    case TODO:
+                        if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                            throw new ChatBoxException("I am willing to help but what stuff is to do. The description of a todo cannot be empty.");
+                        }
+                        Task newTodo = new ToDo(parts[1]);
+                        taskList.add(newTodo);
+                        System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTodo
+                                + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
+                        break;
+
+                    case DEADLINE:
+                        if (parts.length < 2 || !parts[1].contains(" /by ")) {
+                            throw new ChatBoxException("I am willing to help and date is important for a deadline.Hence, a deadline must have a description and a /by time.");
+                        }
+                        String[] deadlineParts = parts[1].split(" /by ");
+                        Task newDeadline = new Deadline(deadlineParts[0], deadlineParts[1]);
+                        taskList.add(newDeadline);
+                        System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newDeadline
+                                + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
+                        break;
+
+                    case EVENT:
+                        if (parts.length < 2 || !parts[1].contains(" /from ") || !parts[1].contains(" /to ")) {
+                            throw new ChatBoxException("I am willing to help and date is important for an event. Hence, an event must have a /from and a /to time.");
+                        }
+                        String[] eventParts = parts[1].split(" /from ");
+                        String[] timeParts = eventParts[1].split(" /to ");
+                        Task newEvent = new Event(eventParts[0], timeParts[0], timeParts[1]);
+                        taskList.add(newEvent);
+                        System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newEvent
+                                + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
+                        break;
+
+                    case DELETE:
+                        if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                            throw new ChatBoxException("I am eager to help you clean up, but I need a number! Please specify which task number to delete.");
+                        }
+                        int delIndex = Integer.parseInt(parts[1]) - 1;
+                        Task removedTask = taskList.get(delIndex);
+                        taskList.remove(delIndex);
+                        System.out.println(horizontalLine + "\n Noted. I've removed this task:\n   "
+                                + removedTask + "\n Now you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
+                        break;
+
+                    default:
+                        // Note:The Enum valueOf catch handles most cases
+                        throw new ChatBoxException("I am willing to help and I'm sorry, but I don't know what that means :-(.");
                 }
 
             } catch (ChatBoxException e) {
                 System.out.println(horizontalLine + "\n " + e.getMessage() + "\n" + horizontalLine);
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println(horizontalLine + "\n Please enter a valid task number.\n" + horizontalLine);
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println(horizontalLine + "\n That task number does not exist. Do not get ahead of yourself\n" + horizontalLine);
             }
         }
         // Exit message
