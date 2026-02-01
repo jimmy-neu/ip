@@ -10,7 +10,12 @@ public class ZhengjunChatbox {
     public static void main(String[] args) {
         String botName = "ZhengjunChatbox";
         String horizontalLine = "____________________________________________________________";
-        System.out.println(horizontalLine + "\nHello! I'm " + botName + "\nYou can enter text for me to store and key in command: List to view them. \nMoreover, you can mark and unmark tasks. \nThere are three types of input: Todo, Deadline and Event. Enter bye to exit\n" + horizontalLine);
+        System.out.println(horizontalLine);
+        System.out.println("Hello! I'm " + botName);
+        System.out.println("You can enter text for me to store and key in command: List to view them.");
+        System.out.println("Moreover, you can mark and unmark tasks.");
+        System.out.println("There are three types of input: Todo, Deadline and Event. Enter bye to exit");
+        System.out.println(horizontalLine);
 
         ArrayList<Task> taskList = new ArrayList<>(); // The Arraylist now store Task class
         Scanner scanner = new Scanner(System.in);
