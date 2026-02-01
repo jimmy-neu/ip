@@ -1,5 +1,7 @@
-package chatbot.main;
+package chatbox.main;
+
 import java.util.Scanner;
+
 
 /**
  * This Code Block echoes input until "bye" is received.
@@ -8,6 +10,7 @@ public class ZhengjunChatbox {
     public static void main(String[] args) {
         String botName = "ZhengjunChatbox";
         String horizontalLine = "____________________________________________________________";
+
 
         System.out.println(horizontalLine + "\nHello! I'm " + botName + "\nWhat can I do for you?\n" + horizontalLine);
         Scanner scanner = new Scanner(System.in);
@@ -18,6 +21,7 @@ public class ZhengjunChatbox {
             if (input.equals("bye")) {
                 break;
             }
+
 
             System.out.println(horizontalLine + "\n" + input + "\n" + horizontalLine);
         }
