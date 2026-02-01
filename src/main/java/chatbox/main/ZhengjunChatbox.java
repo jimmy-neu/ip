@@ -5,7 +5,13 @@ import java.util.ArrayList;
 
 /**
  * This further add the ability to support ToDo, Deadline and  Event.
+ * * It handles various user input errors, including:
+ * - Empty descriptions for tasks (e.g., "todo").
+ * - Missing time parameters for deadlines and events (e.g., missing /by, /from, or /to).
+ * - Invalid task numbering during marking or unmarking (e.g., non-integers or out-of-bounds).
+ * - Unrecognized commands.
  */
+
 public class ZhengjunChatbox {
     public static void main(String[] args) {
         String botName = "ZhengjunChatbox";
@@ -21,58 +27,84 @@ public class ZhengjunChatbox {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine();
-            String[] parts = input.split(" ", 2); // Split the command from the rest of the string
-            String command = parts[0];
-
             if (input.equals("bye")) {
                 break;
-            } else if (input.equals("list")) {
-                System.out.println(horizontalLine + "\nHere are the tasks in your list:");
-                for (int i = 0; i < taskList.size(); i++) {
-                    System.out.println((i + 1) + "." + taskList.get(i));
+            }
+
+            try {
+                String[] parts = input.split(" ", 2); // Split the command from the rest of the string
+                String command = parts[0];
+
+                if (command.equals("list")) {
+                    System.out.println(horizontalLine + "\nHere are the tasks in your list:");
+                    for (int i = 0; i < taskList.size(); i++) {
+                        System.out.println((i + 1) + "." + taskList.get(i));
+                    }
+                    System.out.println(horizontalLine);
+
+                } else if (command.equals("mark") || command.equals("unmark")) {
+                    // ERROR: Check if task number is provided
+                    if (parts.length < 2) {
+                        throw new ChatBoxException("I am really happy to help u update the list but can't do it without you specifying the number. Please specify the task number to " + command + ".");
+                    }
+                    int index = Integer.parseInt(parts[1]) - 1;
+
+                    if (command.equals("mark")) {
+                        taskList.get(index).markAsDone();
+                        System.out.println(horizontalLine + "\nNice! I've marked this task as done:\n  "
+                                + taskList.get(index) + "\n" + horizontalLine);
+                    } else {
+                        taskList.get(index).unmarkAsDone();
+                        System.out.println(horizontalLine + "\nOK, I've marked this task as not done yet:\n  "
+                                + taskList.get(index) + "\n" + horizontalLine);
+                    }
+
+                } else if (command.equals("todo")) {
+                    // ERROR: Check if description is empty
+                    if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                        throw new ChatBoxException("I am willing to help but what stuff is to do. The description of a todo cannot be empty.");
+                    }
+                    Task newTask = new ToDo(parts[1]);
+                    taskList.add(newTask);
+                    System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTask
+                            + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
+
+                } else if (command.equals("deadline")) {
+                    // ERROR: Check for description and /by
+                    if (parts.length < 2 || !parts[1].contains(" /by ")) {
+                        throw new ChatBoxException("I am willing to help and date is important for a deadline.Hence, a deadline must have a description and a /by time.");
+                    }
+                    // Split the input into smaller parts
+                    // For instance, "return book /by Sunday" can be splited into ["return book", "Sunday"]
+                    String[] deadlineParts = parts[1].split(" /by ");
+                    Task newTask = new Deadline(deadlineParts[0], deadlineParts[1]);
+                    taskList.add(newTask);
+                    System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTask
+                            + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
+
+                } else if (command.equals("event")) {
+                    // ERROR: Check for /from and /to
+                    if (parts.length < 2 || !parts[1].contains(" /from ") || !parts[1].contains(" /to ")) {
+                        throw new ChatBoxException("I am willing to help and date is important for an event. Hence, an event must have a /from and a /to time.");
+                    }
+                    String[] eventParts = parts[1].split(" /from ");
+                    String[] timeParts = eventParts[1].split(" /to ");
+                    Task newTask = new Event(eventParts[0], timeParts[0], timeParts[1]);
+                    taskList.add(newTask);
+                    System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTask
+                            + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
+
+                } else {
+                    // ERROR: Unknown command
+                    throw new ChatBoxException("I am willing to help and I'm sorry, but I don't know what that means :-(. Could you be more specific");
                 }
-                System.out.println(horizontalLine);
 
-            } else if (command.equals("mark")) {
-                int index = Integer.parseInt(parts[1]) - 1;
-                taskList.get(index).markAsDone();
-                System.out.println(horizontalLine + "\nNice! I've marked this task as done:\n  "
-                        + taskList.get(index) + "\n" + horizontalLine);
-
-            } else if (command.equals("unmark")) {
-                int index = Integer.parseInt(parts[1]) - 1;
-                taskList.get(index).unmarkAsDone();
-                System.out.println(horizontalLine + "\nOK, I've marked this task as not done yet:\n  "
-                        + taskList.get(index) + "\n" + horizontalLine);
-
-            } else if (command.equals("todo")) {
-                Task newTask = new ToDo(parts[1]);
-                taskList.add(newTask);
-                System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTask
-                        + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
-
-            } else if (command.equals("deadline")) {
-                // Split the input into smaller parts
-                // For instance, "return book /by Sunday" can be splited into ["return book", "Sunday"]
-                String[] deadlineParts = parts[1].split(" /by ");
-                Task newTask = new Deadline(deadlineParts[0], deadlineParts[1]);
-                taskList.add(newTask);
-                System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTask
-                        + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
-
-            } else if (command.equals("event")) {
-                String[] eventParts = parts[1].split(" /from ");
-                String[] timeParts = eventParts[1].split(" /to ");
-                Task newTask = new Event(eventParts[0], timeParts[0], timeParts[1]);
-                taskList.add(newTask);
-                System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTask
-                        + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
-
-            } else {
-                // This handles cases where no specific command matches.
-                Task newTask = new Task(input);
-                taskList.add(newTask);
-                System.out.println(horizontalLine + "\nadded: " + input + "\n" + horizontalLine);
+            } catch (ChatBoxException e) {
+                System.out.println(horizontalLine + "\n " + e.getMessage() + "\n" + horizontalLine);
+            } catch (NumberFormatException e) {
+                System.out.println(horizontalLine + "\n Please enter a valid task number.\n" + horizontalLine);
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(horizontalLine + "\n That task number does not exist. Do not get ahead of yourself\n" + horizontalLine);
             }
         }
         // Exit message
