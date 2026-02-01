@@ -4,12 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * This further add the ability to support ToDo, Deadline and  Event.
- * * It handles various user input errors, including:
- * - Empty descriptions for tasks (e.g., "todo").
- * - Missing time parameters for deadlines and events (e.g., missing /by, /from, or /to).
- * - Invalid task numbering during marking or unmarking (e.g., non-integers or out-of-bounds).
- * - Unrecognized commands.
+ * This add level-6 delete functionalities and its possible respective errors.
  */
 
 public class ZhengjunChatbox {
@@ -94,6 +89,18 @@ public class ZhengjunChatbox {
                     System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTask
                             + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
 
+                } else if (command.equals("delete")) { // Level 6
+                    if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                        throw new ChatBoxException("I am eager to help you clean up, but I need a number! Please specify which task number to delete.");
+                    }
+                    int index = Integer.parseInt(parts[1]) - 1;
+                    if (index < 0 || index >= taskList.size()) {
+                        throw new ChatBoxException("That task number does not exist. Make sure you cross the right item.");
+                    }
+                    Task removedTask = taskList.get(index);
+                    taskList.remove(index);
+                    System.out.println(horizontalLine + "\n Noted. I've removed this task:\n   "
+                            + removedTask + "\n Now you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
                 } else {
                     // ERROR: Unknown command
                     throw new ChatBoxException("I am willing to help and I'm sorry, but I don't know what that means :-(. Could you be more specific");
