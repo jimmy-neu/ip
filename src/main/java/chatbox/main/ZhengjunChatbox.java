@@ -17,8 +17,8 @@ public class ZhengjunChatbox {
         System.out.println("Moreover, you can mark and unmark tasks.");
         System.out.println("There are three types of input: Todo, Deadline and Event. Enter bye to exit");
         System.out.println(horizontalLine);
-
-        ArrayList<Task> taskList = new ArrayList<>(); // The Arraylist now store Task class
+        Storage storage = new Storage("data/ChatboxMemory.txt");
+        ArrayList<Task> taskList = storage.load();
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine();
@@ -61,6 +61,7 @@ public class ZhengjunChatbox {
                             System.out.println(horizontalLine + "\nOK, I've marked this task as not done yet:\n  "
                                     + taskList.get(markIndex) + "\n" + horizontalLine);
                         }
+                        storage.save(taskList);
                         break;
 
                     case TODO:
@@ -69,6 +70,7 @@ public class ZhengjunChatbox {
                         }
                         Task newTodo = new ToDo(parts[1]);
                         taskList.add(newTodo);
+                        storage.save(taskList);
                         System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newTodo
                                 + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
                         break;
@@ -80,6 +82,7 @@ public class ZhengjunChatbox {
                         String[] deadlineParts = parts[1].split(" /by ");
                         Task newDeadline = new Deadline(deadlineParts[0], deadlineParts[1]);
                         taskList.add(newDeadline);
+                        storage.save(taskList);
                         System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newDeadline
                                 + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
                         break;
@@ -92,6 +95,7 @@ public class ZhengjunChatbox {
                         String[] timeParts = eventParts[1].split(" /to ");
                         Task newEvent = new Event(eventParts[0], timeParts[0], timeParts[1]);
                         taskList.add(newEvent);
+                        storage.save(taskList);
                         System.out.println(horizontalLine + "\nGot it. I've added this task:\n  " + newEvent
                                 + "\nNow you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
                         break;
@@ -103,6 +107,7 @@ public class ZhengjunChatbox {
                         int delIndex = Integer.parseInt(parts[1]) - 1;
                         Task removedTask = taskList.get(delIndex);
                         taskList.remove(delIndex);
+                        storage.save(taskList);
                         System.out.println(horizontalLine + "\n Noted. I've removed this task:\n   "
                                 + removedTask + "\n Now you have " + taskList.size() + " tasks in the list.\n" + horizontalLine);
                         break;
