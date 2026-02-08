@@ -9,8 +9,8 @@ import chatbox.main.commands.CheerCommand;
 
 public class Parser {
 
-    public static Command parse(String fullCommand) throws ChatBoxException {
-        String[] parts = fullCommand.split(" ", 2);
+    public static Command parse(String userInput) throws ChatBoxException {
+        String[] parts = userInput.split(" ", 2);
         String commandWord = parts[0].toUpperCase();
 
         switch (commandWord) {
