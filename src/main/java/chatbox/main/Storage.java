@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
-
+/**
+ * Handles loading and saving tasks to the file system.
+ */
 public class Storage {
     private final String filePath;
 

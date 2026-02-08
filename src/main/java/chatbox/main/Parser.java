@@ -7,6 +7,10 @@ import chatbox.main.tasks.ToDo;
 import chatbox.main.commands.FindCommand;
 import chatbox.main.commands.CheerCommand;
 
+/**
+ * Parses user input into commands for execution.
+ * contains methods to interpret user commands and arguments.
+ */
 public class Parser {
 
     public static Command parse(String userInput) throws ChatBoxException {

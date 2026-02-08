@@ -3,7 +3,9 @@ package chatbox.main.commands;
 import chatbox.main.Storage;
 import chatbox.main.tasks.TaskList;
 import chatbox.main.Ui;
-
+/**
+ * Lists all tasks currently stored in the task list.
+ */
 public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

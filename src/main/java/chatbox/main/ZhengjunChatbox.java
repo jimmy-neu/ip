@@ -2,7 +2,10 @@ package chatbox.main;
 
 import chatbox.main.commands.Command;
 import chatbox.main.tasks.TaskList;
-
+/**
+ * Handles user interface interactions.
+ * Responsible for reading user input and displaying messages to the user.
+ */
 public class ZhengjunChatbox {
 
     private Storage storage;
