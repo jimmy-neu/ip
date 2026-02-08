@@ -1,2 +1,3 @@
-Todo | Done | read
-Deadline | Not done | lectures | Monday
+Todo | Not done | read book
+Deadline | Done | return book | 2/12/2019 1800
+Event | Not done | project meeting | 2/12/2019 1400 | 2/12/2019 1600
