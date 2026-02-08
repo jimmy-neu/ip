@@ -4,7 +4,10 @@ import chatbox.main.commands.*;
 import chatbox.main.tasks.Deadline;
 import chatbox.main.tasks.Event;
 import chatbox.main.tasks.ToDo;
-
+/**
+ * Parses user input into commands for execution.
+ * contains methods to interpret user commands and arguments.
+ */
 public class Parser {
 
     public static Command parse(String fullCommand) throws ChatBoxException {

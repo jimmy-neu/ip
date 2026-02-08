@@ -3,7 +3,9 @@ package chatbox.main.commands;
 import chatbox.main.*;
 import chatbox.main.tasks.Task;
 import chatbox.main.tasks.TaskList;
-
+/**
+ * Adds a new task (Todo, Deadline, or Event) to the task list.
+ */
 public class DeleteCommand extends Command {
     private final int index;
 

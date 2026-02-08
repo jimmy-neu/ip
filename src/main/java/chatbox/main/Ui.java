@@ -1,7 +1,10 @@
 package chatbox.main;
 
 import java.util.Scanner;
-
+/**
+ * Handles user interface interactions.
+ * Responsible for reading user input and displaying messages to the user.
+ */
 public class Ui {
     private final Scanner scanner;
     private final String HORIZONTAL_LINE = "____________________________________________________________";
