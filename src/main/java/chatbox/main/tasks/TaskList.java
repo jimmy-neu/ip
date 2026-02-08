@@ -32,4 +32,26 @@ public class TaskList {
     public ArrayList<Task> getAllTasks() {
         return tasks;
     }
+
+    public String findTasks(String keyword) {
+        StringBuilder sb = new StringBuilder();
+        int count = 0;
+        sb.append("Here are the matching tasks in your list:\n");
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            // Check if the description contains the keyword
+            if (task.getDescription().contains(keyword)) {
+                count++;
+                // Append the matching task to the result string
+                sb.append(count).append(".").append(task.toString()).append("\n");
+            }
+        }
+
+        if (count == 0) {
+            return "No matching tasks found.";
+        }
+
+        return sb.toString();
+    }
 }

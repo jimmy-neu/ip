@@ -4,7 +4,7 @@ import chatbox.main.commands.*;
 import chatbox.main.tasks.Deadline;
 import chatbox.main.tasks.Event;
 import chatbox.main.tasks.ToDo;
-
+import chatbox.main.commands.FindCommand;
 public class Parser {
 
     public static Command parse(String fullCommand) throws ChatBoxException {
@@ -37,6 +37,11 @@ public class Parser {
                 String[] eParts = parts[1].split(" /from ");
                 String[] times = eParts[1].split(" /to ");
                 return new AddCommand(new Event(eParts[0], times[0], times[1]));
+            case "FIND":
+                if (parts.length < 2 || parts[1].trim().isEmpty()) {
+                    throw new ChatBoxException("The keyword for find cannot be empty as I will not know what to find");
+                }
+                return new FindCommand(parts[1].trim());
             default:
                 throw new ChatBoxException("I'm sorry, but I don't know what that means :-(");
         }
