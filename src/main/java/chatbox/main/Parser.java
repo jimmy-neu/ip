@@ -4,6 +4,7 @@ import chatbox.main.commands.*;
 import chatbox.main.tasks.Deadline;
 import chatbox.main.tasks.Event;
 import chatbox.main.tasks.ToDo;
+import chatbox.main.commands.CheerCommand;
 
 public class Parser {
 
@@ -37,6 +38,8 @@ public class Parser {
                 String[] eParts = parts[1].split(" /from ");
                 String[] times = eParts[1].split(" /to ");
                 return new AddCommand(new Event(eParts[0], times[0], times[1]));
+            case "CHEER":
+                return new CheerCommand();
             default:
                 throw new ChatBoxException("I'm sorry, but I don't know what that means :-(");
         }
