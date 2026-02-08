@@ -1,8 +1,9 @@
 package chatbox.main;
 
-/**
- * Represent the types of commands that ZhengjunChatbox can handle.
- */
-public enum Command {
-    TODO, DEADLINE, EVENT, MARK, UNMARK, DELETE, LIST, BYE
+public abstract class Command {
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws ChatBoxException;
+
+    public boolean isExit() {
+        return false;
+    }
 }
