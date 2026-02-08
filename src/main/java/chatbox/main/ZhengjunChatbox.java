@@ -122,6 +122,10 @@ public class ZhengjunChatbox {
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 System.out.println(horizontalLine + "\n Please enter a valid task number.\n" + horizontalLine);
             }
+            catch (IllegalArgumentException e) {
+                // <--- ADD THIS NEW BLOCK!
+                System.out.println(horizontalLine + "\n " + e.getMessage() + "\n" + horizontalLine);
+            }
         }
         // Exit message
         System.out.println(horizontalLine + "\nBye. Hope to see you again soon!\n" + horizontalLine);

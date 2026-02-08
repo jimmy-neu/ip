@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.format.DateTimeFormatter;
 
 public class Storage {
     private final String filePath;
@@ -22,7 +23,7 @@ public class Storage {
                 file.getParentFile().mkdirs();
             } // Create directory
             file.createNewFile();
-
+            DateTimeFormatter saveFormat = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             FileWriter writer = new FileWriter(file);
             for (Task task : tasks) {
                 String line = "";
@@ -33,10 +34,13 @@ public class Storage {
                     line = "Todo | " + status + " | " + task.description;
                 } else if (task instanceof Deadline) {
                     Deadline d = (Deadline) task;
-                    line = "Deadline | " + status + " | " + d.description + " | " + d.by;
+                    String strictDate = d.by.format(saveFormat);
+                    line = "Deadline | " + status + " | " + d.description + " | " + strictDate;
                 } else if (task instanceof Event) {
                     Event e = (Event) task;
-                    line = "Event | " + status + " | " + e.description + " | " + e.from + " | " + e.to;
+                    String fromDate = e.from.format(saveFormat);
+                    String toDate = e.to.format(saveFormat);
+                    line = "Event | " + status + " | " + e.description + " | " + fromDate + " | " + toDate;
                 }
                 writer.write(line + "\n");
             }
