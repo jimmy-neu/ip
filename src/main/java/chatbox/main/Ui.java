@@ -1,6 +1,11 @@
 package chatbox.main;
 
 import java.util.Scanner;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Random;
 
 public class Ui {
     private final Scanner scanner;
@@ -38,5 +43,29 @@ public class Ui {
 
     public void showMessage(String message) {
         System.out.println(message);
+    }
+    public void showCheer() {
+        try {
+            List<String> lines = Files.readAllLines(Paths.get("data", "quotes.txt"));
+
+            if (lines.isEmpty()) {
+                showLine();
+                System.out.println("The quote file is empty!");
+                showLine();
+                return;
+            }
+            // Pick a random line
+            Random random = new Random();
+            String randomQuote = lines.get(random.nextInt(lines.size()));
+
+            showLine();
+            System.out.println(randomQuote);
+            showLine();
+
+        } catch (IOException e) {
+            showLine();
+            System.out.println("Could not load quotes. Make sure 'data/quotes.txt' exists!");
+            showLine();
+        }
     }
 }

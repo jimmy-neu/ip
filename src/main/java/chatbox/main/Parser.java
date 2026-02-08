@@ -5,6 +5,8 @@ import chatbox.main.tasks.Deadline;
 import chatbox.main.tasks.Event;
 import chatbox.main.tasks.ToDo;
 import chatbox.main.commands.FindCommand;
+import chatbox.main.commands.CheerCommand;
+
 public class Parser {
 
     public static Command parse(String fullCommand) throws ChatBoxException {
@@ -42,6 +44,8 @@ public class Parser {
                     throw new ChatBoxException("The keyword for find cannot be empty as I will not know what to find");
                 }
                 return new FindCommand(parts[1].trim());
+            case "CHEER":
+                return new CheerCommand();
             default:
                 throw new ChatBoxException("I'm sorry, but I don't know what that means :-(");
         }
