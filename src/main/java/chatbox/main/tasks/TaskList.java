@@ -1,4 +1,4 @@
-package chatbox.main;
+package chatbox.main.tasks;
 
 import java.util.ArrayList;
 

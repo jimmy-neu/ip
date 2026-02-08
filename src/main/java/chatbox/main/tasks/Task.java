@@ -1,4 +1,4 @@
-package chatbox.main;
+package chatbox.main.tasks;
 
 public class Task {
     protected String description;
@@ -24,6 +24,13 @@ public class Task {
         this.isDone = false;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
+    public boolean isDone() {
+        return this.isDone;
+    }
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

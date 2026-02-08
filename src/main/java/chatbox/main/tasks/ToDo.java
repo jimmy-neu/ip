@@ -1,4 +1,5 @@
-package chatbox.main;
+package chatbox.main.tasks;
+
 //Inheritance of Task
 public class ToDo extends Task {
     public ToDo(String description) {

@@ -1,5 +1,8 @@
 package chatbox.main;
 
+import chatbox.main.commands.Command;
+import chatbox.main.tasks.TaskList;
+
 public class ZhengjunChatbox {
 
     private Storage storage;

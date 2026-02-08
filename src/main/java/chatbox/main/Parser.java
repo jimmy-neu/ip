@@ -1,5 +1,10 @@
 package chatbox.main;
 
+import chatbox.main.commands.*;
+import chatbox.main.tasks.Deadline;
+import chatbox.main.tasks.Event;
+import chatbox.main.tasks.ToDo;
+
 public class Parser {
 
     public static Command parse(String fullCommand) throws ChatBoxException {
@@ -16,10 +21,10 @@ public class Parser {
                 return new DeleteCommand(Integer.parseInt(parts[1]) - 1);
             case "MARK":
                 if (parts.length < 2) throw new ChatBoxException("Please specify which task number to mark.");
-                return new MarkCommand(Integer.parseInt(parts[1]) - 1, true);
+                return new ChatBoxException.MarkCommand(Integer.parseInt(parts[1]) - 1, true);
             case "UNMARK":
                 if (parts.length < 2) throw new ChatBoxException("Please specify which task number to unmark.");
-                return new MarkCommand(Integer.parseInt(parts[1]) - 1, false);
+                return new ChatBoxException.MarkCommand(Integer.parseInt(parts[1]) - 1, false);
             case "TODO":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) throw new ChatBoxException("The description of a todo cannot be empty.");
                 return new AddCommand(new ToDo(parts[1]));

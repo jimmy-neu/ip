@@ -1,5 +1,10 @@
 package chatbox.main;
 
+import chatbox.main.tasks.Deadline;
+import chatbox.main.tasks.Event;
+import chatbox.main.tasks.Task;
+import chatbox.main.tasks.ToDo;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,20 +32,24 @@ public class Storage {
             FileWriter writer = new FileWriter(file);
             for (Task task : tasks) {
                 String line = "";
-                String status = task.isDone ? "Done" : "Not done";
+                String status = task.isDone() ? "Done" : "Not done";
 
-                // Check the type of the task here and update the information for saving later
                 if (task instanceof ToDo) {
-                    line = "Todo | " + status + " | " + task.description;
-                } else if (task instanceof Deadline) {
+                    // 2. Use .getDescription() instead of .description
+                    line = "Todo | " + status + " | " + task.getDescription();
+                }
+                else if (task instanceof Deadline) {
                     Deadline d = (Deadline) task;
-                    String strictDate = d.by.format(saveFormat);
-                    line = "Deadline | " + status + " | " + d.description + " | " + strictDate;
-                } else if (task instanceof Event) {
+                    // 3. Use getters for everything
+                    String strictDate = d.getBy().format(saveFormat);
+                    line = "Deadline | " + status + " | " + d.getDescription() + " | " + strictDate;
+                }
+                else if (task instanceof Event) {
                     Event e = (Event) task;
-                    String fromDate = e.from.format(saveFormat);
-                    String toDate = e.to.format(saveFormat);
-                    line = "Event | " + status + " | " + e.description + " | " + fromDate + " | " + toDate;
+                    // 4. Use getters for everything
+                    String fromDate = e.getFrom().format(saveFormat);
+                    String toDate = e.getTo().format(saveFormat);
+                    line = "Event | " + status + " | " + e.getDescription() + " | " + fromDate + " | " + toDate;
                 }
                 writer.write(line + "\n");
             }

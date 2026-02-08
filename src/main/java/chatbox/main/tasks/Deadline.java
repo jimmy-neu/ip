@@ -1,4 +1,6 @@
-package chatbox.main;
+package chatbox.main.tasks;
+import chatbox.main.DateParser;
+
 import java.time.LocalDateTime;
 //Inheritance of Task
 public class Deadline extends Task {
@@ -10,6 +12,9 @@ public class Deadline extends Task {
         if (this.by == null) {
             throw new IllegalArgumentException("You key in the format that I don't understand! Please Use d/M/yyyy HHmm (e.g., 2/12/2019 1800)");
         }
+    }
+    public java.time.LocalDateTime getBy() {
+        return by;
     }
 
     @Override

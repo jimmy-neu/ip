@@ -1,4 +1,8 @@
-package chatbox.main;
+package chatbox.main.commands;
+
+import chatbox.main.*;
+import chatbox.main.tasks.Task;
+import chatbox.main.tasks.TaskList;
 
 public class AddCommand extends Command {
     private final Task task;

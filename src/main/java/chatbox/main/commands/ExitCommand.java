@@ -1,4 +1,8 @@
-package chatbox.main;
+package chatbox.main.commands;
+
+import chatbox.main.Storage;
+import chatbox.main.tasks.TaskList;
+import chatbox.main.Ui;
 
 public class ExitCommand extends Command {
     @Override
