@@ -12,7 +12,10 @@ public class DeleteCommand extends Command {
     public DeleteCommand(int index) {
         this.index = index;
     }
-
+    /**
+     * Executes the delete command.
+     * Removes the task from the task list and then saves the updated list to storage,
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatBoxException {
         try {

@@ -4,13 +4,13 @@ import chatbox.main.tasks.Deadline;
 import chatbox.main.tasks.Event;
 import chatbox.main.tasks.Task;
 import chatbox.main.tasks.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.time.format.DateTimeFormatter;
+
 /**
  * Handles loading and saving tasks to the file system.
  */
@@ -86,17 +86,17 @@ public class Storage {
 
                 Task task = null;
                 switch (type) {
-                    case "Todo":
-                        task = new ToDo(description);
-                        break;
-                    case "Deadline":
-                        task = new Deadline(description, parts[3]);
-                        break;
-                    case "Event":
-                        task = new Event(description, parts[3], parts[4]);
-                        break;
-                    default:
-                        System.out.println("Unknown task type in file: " + type);
+                case "Todo":
+                    task = new ToDo(description);
+                    break;
+                case "Deadline":
+                    task = new Deadline(description, parts[3]);
+                    break;
+                case "Event":
+                    task = new Event(description, parts[3], parts[4]);
+                    break;
+                default:
+                    System.out.println("Unknown task type in file: " + type);
                 }
 
                 if (task != null) {
