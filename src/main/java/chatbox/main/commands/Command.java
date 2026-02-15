@@ -9,7 +9,7 @@ import chatbox.main.Ui;
  * This class serves as a base for all specific command types (e.g., AddCommand, ExitCommand).
  */
 public abstract class Command {
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws ChatBoxException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws ChatBoxException;
 
     public boolean isExit() {
         return false;

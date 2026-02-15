@@ -1,0 +1,2 @@
+Todo | Not done | read
+Event | Done | project meeting | 15/2/2026 1400 | 15/2/2026 1600

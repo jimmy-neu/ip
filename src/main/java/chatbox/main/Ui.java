@@ -9,67 +9,43 @@ import java.util.Random;
 
 /**
  * Handles user interface interactions.
- * Responsible for reading user input and displaying messages to the user.
+ * Responsible for formatting messages to be displayed by the GUI.
  */
 public class Ui {
-    private final Scanner scanner;
-    private final String HORIZONTAL_LINE = "____________________________________________________________";
 
     public Ui() {
-        this.scanner = new Scanner(System.in);
     }
 
-    public String readCommand() {
-        return scanner.nextLine();
+    public String showWelcome() {
+        return "Hello! I'm ZhengjunChatbox\n" +
+                "What can I do for you?\n" +
+                "You can enter text for me to store or commands like 'list', 'mark', 'delete'.";
     }
 
-    public void showWelcome() {
-        showLine();
-        System.out.println("Hello! I'm ZhengjunChatbox");
-        System.out.println("What can I do for you?");
-        System.out.println("You can enter text for me to store and key in command: List to view them.");
-        System.out.println("Moreover, you can mark and unmark tasks.");
-        System.out.println("There are three types of input: Todo, Deadline and Event. Enter bye to exit");
-        showLine();
+    public String showLoadingError() {
+        return "OOPS!! I tried to load your file but failed. Starting with an empty list.";
     }
 
-    public void showLine() {
-        System.out.println(HORIZONTAL_LINE);
+    public String showError(String message) {
+        return "OOPS There is an error!! " + message;
     }
 
-    public void showLoadingError() {
-        System.out.println("OOPS!! I tried to load your file but failed. Starting with an empty list.");
+    public String showMessage(String message) {
+        return message;
     }
 
-    public void showError(String message) {
-        System.out.println("OOPS There is an error!! " + message);
-    }
-
-    public void showMessage(String message) {
-        System.out.println(message);
-    }
-    public void showCheer() {
+    public String showCheer() {
         try {
             List<String> lines = Files.readAllLines(Paths.get("data", "quotes.txt"));
 
             if (lines.isEmpty()) {
-                showLine();
-                System.out.println("The quote file is empty!");
-                showLine();
-                return;
+                return "The quote file is empty!";
             }
-            // Pick a random line
             Random random = new Random();
-            String randomQuote = lines.get(random.nextInt(lines.size()));
-
-            showLine();
-            System.out.println(randomQuote);
-            showLine();
+            return lines.get(random.nextInt(lines.size()));
 
         } catch (IOException e) {
-            showLine();
-            System.out.println("Could not load quotes. Make sure 'data/quotes.txt' exists!");
-            showLine();
+            return "Could not load quotes. Make sure 'data/quotes.txt' exists!";
         }
     }
 }

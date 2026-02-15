@@ -2,15 +2,21 @@ package chatbox.main;
 
 import chatbox.main.commands.Command;
 import chatbox.main.tasks.TaskList;
+
 /**
- * Handles user interface interactions.
- * Responsible for reading user input and displaying messages to the user.
+ * The main logic class for the chatbot.
+ * Now acts as the "brain" that receives input from the GUI and returns responses.
  */
 public class ZhengjunChatbox {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    // Default constructor for GUI
+    public ZhengjunChatbox() {
+        this("data/ChatboxMemory.txt");
+    }
 
     // Sets up the tools and tries to load the save file
     public ZhengjunChatbox(String filePath) {
@@ -19,38 +25,22 @@ public class ZhengjunChatbox {
         try {
             tasks = new TaskList(storage.load());
         } catch (Exception e) {
-            ui.showLoadingError();
+            // If loading fails, start with an empty list
             tasks = new TaskList();
         }
     }
 
-    // The Command Loop: Keeps running until the user says "bye"
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-
-                //Parse the text into a Command object
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-
-            } catch (ChatBoxException e) {
-                ui.showError(e.getMessage());
-            } catch (Exception e) {
-                // Catches other unexpected errors
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
+    public String getWelcome() {
+        return ui.showWelcome();
     }
-
-    public static void main(String[] args) {
-        new ZhengjunChatbox("data/ChatboxMemory.txt").run();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage); // Returns the result String to the GUI
+        } catch (ChatBoxException e) {
+            return ui.showError(e.getMessage());
+        } catch (Exception e) {
+            return ui.showError(e.getMessage());
+        }
     }
 }

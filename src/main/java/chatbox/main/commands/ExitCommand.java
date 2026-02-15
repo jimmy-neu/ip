@@ -3,13 +3,16 @@ package chatbox.main.commands;
 import chatbox.main.Storage;
 import chatbox.main.tasks.TaskList;
 import chatbox.main.Ui;
+
 /**
- * Adds a new task (Todo, Deadline, or Event) to the task list.
+ * Terminates the program.
  */
 public class ExitCommand extends Command {
+
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage("Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        // Return the goodbye message so it appears in the GUI
+        return "Bye. Hope to see you again soon!";
     }
 
     @Override

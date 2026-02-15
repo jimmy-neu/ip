@@ -6,7 +6,7 @@ import chatbox.main.tasks.TaskList;
 
 public class CheerCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showCheer();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showCheer();
     }
 }

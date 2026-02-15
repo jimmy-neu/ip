@@ -17,15 +17,15 @@ public class DeleteCommand extends Command {
      * Removes the task from the task list and then saves the updated list to storage,
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ChatBoxException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ChatBoxException {
         try {
             Task removed = tasks.get(index);
             tasks.delete(index);
             storage.save(tasks.getAllTasks());
-            ui.showMessage("Noted. I've removed this task:\n  " + removed);
-            ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
+            return "Noted. I've removed this task:\n  " + removed +
+                    "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
-            throw new ChatBoxException("Invalid task number. Could you check the list again?");
+            throw new ChatBoxException("Invalid task number.");
         }
     }
 }
