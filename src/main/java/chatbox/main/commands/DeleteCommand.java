@@ -4,7 +4,8 @@ import chatbox.main.*;
 import chatbox.main.tasks.Task;
 import chatbox.main.tasks.TaskList;
 /**
- * Adds a new task (Todo, Deadline, or Event) to the task list.
+ * Executes the delete command.
+ * Removes the task from the task list and then saves the updated list to storage,
  */
 public class DeleteCommand extends Command {
     private final int index;
@@ -12,10 +13,6 @@ public class DeleteCommand extends Command {
     public DeleteCommand(int index) {
         this.index = index;
     }
-    /**
-     * Executes the delete command.
-     * Removes the task from the task list and then saves the updated list to storage,
-     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws ChatBoxException {
         try {

@@ -1,7 +1,10 @@
 package chatbox.main.tasks;
 
 import java.util.ArrayList;
-
+/**
+ * Manages the list of tasks.
+ * Provides methods to add, delete, mark, unmark, and search for tasks within the list.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     public TaskList() {

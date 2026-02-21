@@ -1,8 +1,10 @@
 package chatbox.main.tasks;
-import chatbox.main.DateParser;
-
 import java.time.LocalDateTime;
-//Inheritance of Task
+import chatbox.main.DateParser;
+/**
+ * Represents a task with a deadline.
+ * Stores a description and a "by" date.
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
 

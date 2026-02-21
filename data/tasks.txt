@@ -1,2 +1,2 @@
-Todo | Not done | read
-Event | Done | project meeting | 15/2/2026 1400 | 15/2/2026 1600
+Todo | Done | read
+Deadline | Done | return library book | 28/2/2026 2359

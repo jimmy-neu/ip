@@ -1,5 +1,8 @@
 package chatbox.main.tasks;
-
+/**
+ * Represents a generic task in the ZhengjunChatbox.
+ * A task consists of a description and a completion status.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -9,8 +12,6 @@ public class Task {
         this.description = description;
         this.isDone = false; // default to false for new tasks
     }
-
-     //Returns an icon representing the status of the task. X for done Tasks
 
     public String getStatusIcon() {
         return (isDone ? "X" : " ");

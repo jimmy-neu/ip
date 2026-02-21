@@ -31,8 +31,10 @@ public class DateParser {
 
     }
     public static String format(LocalDateTime dateTime) {
-        if (dateTime == null) return "";
-        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a")); //Helper to print in a pretty format
+        if (dateTime == null) {
+            return "";
+        }
+        return dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a"));
     }
 }
 

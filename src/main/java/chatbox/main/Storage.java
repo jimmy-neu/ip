@@ -37,18 +37,16 @@ public class Storage {
                 String status = task.isDone() ? "Done" : "Not done";
 
                 if (task instanceof ToDo) {
-                    // 2. Use .getDescription() instead of .description
+                    // Use .getDescription() instead of .description
                     line = "Todo | " + status + " | " + task.getDescription();
                 }
                 else if (task instanceof Deadline) {
                     Deadline d = (Deadline) task;
-                    // 3. Use getters for everything
                     String strictDate = d.getBy().format(saveFormat);
                     line = "Deadline | " + status + " | " + d.getDescription() + " | " + strictDate;
                 }
                 else if (task instanceof Event) {
                     Event e = (Event) task;
-                    // 4. Use getters for everything
                     String fromDate = e.getFrom().format(saveFormat);
                     String toDate = e.getTo().format(saveFormat);
                     line = "Event | " + status + " | " + e.getDescription() + " | " + fromDate + " | " + toDate;

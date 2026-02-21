@@ -1,6 +1,7 @@
 package chatbox.main.tasks;
-
-//Inheritance of Task
+/**
+ * Represents a "Todo" task, which is a basic task without any date or time attached.
+ */
 public class ToDo extends Task {
     public ToDo(String description) {
         super(description);

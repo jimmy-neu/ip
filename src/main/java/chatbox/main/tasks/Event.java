@@ -1,8 +1,10 @@
 package chatbox.main.tasks;
-//Inheritance of Task
 import chatbox.main.DateParser;
-
 import java.time.LocalDateTime;
+/**
+ * Represents an event task that occurs within a specific time range.
+ * Stores a description, a start time (/from), and an end time (/to).
+ */
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
