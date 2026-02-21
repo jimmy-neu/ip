@@ -34,12 +34,12 @@ public class Parser {
                 if (parts.length < 2) {
                     throw new ChatBoxException("Please specify which task number to mark.");
                 }
-                return new ChatBoxException.MarkCommand(Integer.parseInt(parts[1]) - 1, true);
+                return new MarkCommand(Integer.parseInt(parts[1]) - 1, true);
             case "UNMARK":
                 if (parts.length < 2) {
                     throw new ChatBoxException("Please specify which task number to unmark.");
                 }
-                return new ChatBoxException.MarkCommand(Integer.parseInt(parts[1]) - 1, false);
+                return new MarkCommand(Integer.parseInt(parts[1]) - 1, false);
             case "TODO":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
                     throw new ChatBoxException("The description of a todo cannot be empty.");
