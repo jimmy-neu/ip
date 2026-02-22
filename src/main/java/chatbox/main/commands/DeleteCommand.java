@@ -13,6 +13,16 @@ public class DeleteCommand extends Command {
     public DeleteCommand(int index) {
         this.index = index;
     }
+    /**
+     * Executes the delete command by removing the task from the list and
+     * updating the storage.
+     *
+     * @param tasks   The list of tasks from which the task will be removed.
+     * @param ui      The user interface instance (not directly used here).
+     * @param storage The storage object used to save the updated task list.
+     * @return A string confirmation of the removed task and the new list size.
+     * @throws ChatBoxException If the provided index is out of bounds.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws ChatBoxException {
         try {
