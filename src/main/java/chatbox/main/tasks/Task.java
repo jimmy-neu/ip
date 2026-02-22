@@ -36,4 +36,20 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
+    /**
+     * Compares this task to another object to check for equality.
+     * Two tasks are considered equal if they are of the exact same class
+     * and have the identical description.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Task otherTask = (Task) obj;
+        return this.description.equalsIgnoreCase(otherTask.description);
+    }
 }

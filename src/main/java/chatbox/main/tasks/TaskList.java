@@ -36,6 +36,11 @@ public class TaskList {
         return tasks;
     }
 
+    public boolean hasDuplicate(Task newTask) {
+        // A-Streams feature: Any match returns true if equals() evaluates to true
+        return tasks.stream().anyMatch(task -> task.equals(newTask));
+    }
+
     public String findTasks(String keyword) {
         StringBuilder sb = new StringBuilder();
         int count = 0;
