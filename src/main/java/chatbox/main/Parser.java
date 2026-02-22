@@ -17,7 +17,12 @@ import chatbox.main.commands.CheerCommand;
 public class Parser {
 
     public static Command parse(String userInput) throws ChatBoxException {
+        assert userInput != null : "userInput should not be null";
+
         String[] parts = userInput.split(" ", 2);
+
+        assert parts.length > 0 : "Split should result in at least one part";
+
         String commandWord = parts[0].toUpperCase();
 
         switch (commandWord) {
@@ -50,13 +55,18 @@ public class Parser {
                     throw new ChatBoxException("Deadlines need a description and /by date.");
                 }
                 String[] dParts = parts[1].split(" /by ");
+                assert dParts.length == 2 : "Deadline split failed";
                 return new AddCommand(new Deadline(dParts[0], dParts[1]));
             case "EVENT":
                 if (parts.length < 2 || !parts[1].contains(" /from ") || !parts[1].contains(" /to ")) {
                     throw new ChatBoxException("Events need a description, /from, and /to.");
                 }
                 String[] eParts = parts[1].split(" /from ");
+                assert eParts.length == 2 : "Event /from split failed";
+
                 String[] times = eParts[1].split(" /to ");
+                assert times.length == 2 : "Event /to split failed";
+
                 return new AddCommand(new Event(eParts[0], times[0], times[1]));
             case "FIND":
                 if (parts.length < 2 || parts[1].trim().isEmpty()) {
