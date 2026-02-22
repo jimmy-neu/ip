@@ -11,6 +11,11 @@ import javafx.application.Platform;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
+/**
+ * Controller for the main GUI of the ZhengjunChatbox.
+ * Provides the layout for the other controls and manages the interaction between
+ * the user interface and the chatbox logic.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -30,6 +35,11 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
+    /**
+     * Sets the chatbox logic instance and triggers the initial welcome message.
+     *
+     * @param d The ZhengjunChatbox logic instance to be used by the GUI.
+     */
 
 
     public void setZhengjun(ZhengjunChatbox d) {
