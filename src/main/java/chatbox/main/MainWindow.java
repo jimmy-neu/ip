@@ -11,11 +11,6 @@ import javafx.application.Platform;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
-/**
- * Controller for the main GUI of the ZhengjunChatbox.
- * Provides the layout for the other controls and manages the interaction between
- * the user interface and the chatbox logic.
- */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -33,26 +28,20 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        // Add bulletproof auto-scroll listener
+        // Auto-scrolls perfectly to the bottom
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
-        // Change the background
+
+        // Add The Village background
         dialogContainer.setStyle(
                 "-fx-background-image: url('/images/village.png'); " +
-                        "-fx-background-repeat: no-repeat; " +
-                        "-fx-background-size: cover; " +
-                        "-fx-background-position: center center;"
+                        "-fx-background-size: cover; "
         );
+
+        dialogContainer.minHeightProperty().bind(scrollPane.heightProperty());
     }
-    /**
-     * Sets the chatbox logic instance and triggers the initial welcome message.
-     *
-     * @param d The ZhengjunChatbox logic instance to be used by the GUI.
-     */
 
     public void setZhengjun(ZhengjunChatbox d) {
         chatbox = d;
-        // This makes the bot say Hello immediately!
         dialogContainer.getChildren().add(
                 DialogBox.getZhengjunDialog(chatbox.getWelcome(), zhengjunImage)
         );
@@ -68,9 +57,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getZhengjunDialog(response, zhengjunImage)
         );
         userInput.clear();
-        //close the webpage when bye command is given
+
         if (input.trim().equalsIgnoreCase("bye")) {
-            // Create a 1.5 second delay so the user can read the message
             PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
