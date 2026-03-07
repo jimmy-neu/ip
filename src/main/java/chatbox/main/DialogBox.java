@@ -45,12 +45,24 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        // User bubble: Light blue background, rounded corners, padding
+        db.dialog.setStyle("-fx-background-color: #EB9154; -fx-background-radius: 15; -fx-padding: 10;");
+        return db;
     }
 
     public static DialogBox getZhengjunDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+
+        // Bot bubble: Differentiate normal messages from errors
+        if (text.startsWith("OOPS")) {
+            // Error bubble: Light red background with dark red text
+            db.dialog.setStyle("-fx-background-color: #FFCCCC; -fx-text-fill: #900000; -fx-background-radius: 15; -fx-padding: 10;");
+        } else {
+            // Normal bot bubble: Light gray background
+            db.dialog.setStyle("-fx-background-color: #54EBE3; -fx-text-fill: #000000; -fx-background-radius: 15; -fx-padding: 10;");
+        }
         return db;
     }
 }
