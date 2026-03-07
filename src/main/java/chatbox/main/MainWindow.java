@@ -34,13 +34,22 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        dialogContainer.minHeightProperty().bind(scrollPane.heightProperty());
+        scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
+        // Change the background
+        dialogContainer.setStyle(
+                "-fx-background-image: url('/images/village.png'); " +
+                        "-fx-background-repeat: no-repeat; " +
+                        "-fx-background-size: cover; " +
+                        "-fx-background-position: center center;"
+        );
     }
     /**
      * Sets the chatbox logic instance and triggers the initial welcome message.
      *
      * @param d The ZhengjunChatbox logic instance to be used by the GUI.
      */
-
 
     public void setZhengjun(ZhengjunChatbox d) {
         chatbox = d;
