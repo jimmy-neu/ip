@@ -33,9 +33,8 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-
-        dialogContainer.minHeightProperty().bind(scrollPane.heightProperty());
+        // Add bulletproof auto-scroll listener
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent;");
         // Change the background
         dialogContainer.setStyle(
