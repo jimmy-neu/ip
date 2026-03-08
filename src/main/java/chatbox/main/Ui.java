@@ -17,9 +17,9 @@ public class Ui {
     }
 
     public String showWelcome() {
-        return "Hello! I'm ZhengjunChatbox\n" +
-                "What can I do for you?\n" +
-                "You can enter text for me to store or commands like 'list', 'mark', 'delete'.";
+        return "Welcome to the Hidden Leaf Training Grounds, Naruto!\n" +
+                "I am Instructor Iruka.\n" +
+                "What D-Rank missions or tasks shall we log today?";
     }
 
     public String showLoadingError() {

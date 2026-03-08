@@ -38,7 +38,7 @@ public class MarkCommand extends Command {
             storage.save(tasks.getAllTasks());
 
             if (isMarked) {
-                return "Great job! I've marked this task as done:\n  " + task;
+                return "Great job! Mission accomplished. I've marked this task as done:\n  " + task;
             } else {
                 return "OK take your time, I've marked this task as not done yet:\n  " + task;
             }

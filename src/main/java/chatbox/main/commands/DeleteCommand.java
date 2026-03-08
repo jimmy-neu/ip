@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
             Task removed = tasks.get(index);
             tasks.delete(index);
             storage.save(tasks.getAllTasks());
-            return "Noted. I've removed this task:\n  " + removed +
+            return "Noted. I've removed this jutsu:\n  " + removed +
                     "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
             throw new ChatBoxException("Invalid task number.");

@@ -34,6 +34,6 @@ public class AddCommand extends Command {
 
         tasks.add(task);
         storage.save(tasks.getAllTasks());
-        return "Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.size() + " tasks in the list.";
+        return "Mission accepted. I've added this jutsu:\n  " + task + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }
