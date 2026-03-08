@@ -40,12 +40,13 @@ Now you have 2 missions in the scroll.
 
 Logs an ongoing event or training session that has a specific start and end time.
 
-Example: `event <description> /from <start time> /to <end time>`
+Logs an ongoing event or training session that has a specific start and end time.
 
-Example: `event Bell Test /from Monday 0800 /to Monday 1200`
+Example: `event <description> /from <d/M/yyyy HHmm> /to <d/M/yyyy HHmm>`
+
+Example: `event Bell Test /from 14/03/2026 0800 /to 14/03/2026 1200`
 
 The system will record the event details and confirm the addition to your active list.
-
 Mission accepted. I've added this jutsu:
 [E][ ] Bell Test (from: Monday 0800 to: Monday 1200)
 Now you have 3 missions in the scroll.
