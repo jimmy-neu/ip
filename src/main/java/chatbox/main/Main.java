@@ -7,7 +7,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/**
+ * A GUI for  using FXML.
+ */
 public class Main extends Application {
+    private ZhengjunChatbox chatbox = new ZhengjunChatbox();
     @Override
     public void start(Stage stage) {
         try {
@@ -15,7 +19,11 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setZhengjun(new ZhengjunChatbox("data/tasks.txt"));
+
+            // Add this line to set the name in the title bar!
+            stage.setTitle("Instructor Iruka");
+
+            fxmlLoader.<MainWindow>getController().setZhengjun(chatbox);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
