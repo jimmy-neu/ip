@@ -37,16 +37,27 @@ public class Ui {
 
     public String showCheer() {
         try {
-            List<String> lines = Files.readAllLines(Paths.get("data", "quotes.txt"));
+            java.io.InputStream is = this.getClass().getResourceAsStream("/texts/quotes.txt");
+            if (is == null) {
+                return "Nani?! I lost the quote scroll!";
+            }
+
+            java.util.Scanner scanner = new java.util.Scanner(is);
+            java.util.List<String> lines = new java.util.ArrayList<>();
+
+            while (scanner.hasNextLine()) {
+                lines.add(scanner.nextLine());
+            }
+            scanner.close();
 
             if (lines.isEmpty()) {
-                return "The quote file is empty!";
+                return "The quote scroll is empty!";
             }
-            Random random = new Random();
+            java.util.Random random = new java.util.Random();
             return lines.get(random.nextInt(lines.size()));
 
-        } catch (IOException e) {
-            return "Could not load quotes. Make sure 'data/quotes.txt' exists!";
+        } catch (Exception e) {
+            return "Nani?! Could not unroll the quotes.txt scroll!";
         }
     }
 }
