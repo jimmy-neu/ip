@@ -1,6 +1,6 @@
 # ZhengjunChatbox (Instructor Iruka Edition) User Guide
 
-![Product Screenshot](docs/Ui.png)
+![Product Screenshot](Ui.png)
 
 Welcome to the Hidden Leaf Training Grounds! ZhengjunChatbox is a desktop task-tracking application disguised as a ninja mission scroll. It is designed to help you manage your daily D-Rank missions, strict deadlines, and ongoing events through an immersive, anime-themed Graphical User Interface (GUI). Type your commands, and Instructor Iruka will keep your scroll organized!
 
