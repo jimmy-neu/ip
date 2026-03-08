@@ -39,8 +39,10 @@ public class ZhengjunChatbox {
             return c.execute(tasks, ui, storage); // Returns the result String to the GUI
         } catch (ChatBoxException e) {
             return ui.showError(e.getMessage());
+        } catch (NumberFormatException e) {
+            return ui.showError("Nani?! That's not a number! Please enter a valid mission ID.");
         } catch (Exception e) {
-            return ui.showError(e.getMessage());
+            return ui.showError("Nani?! An unknown jutsu interference occurred: " + e.getMessage());
         }
     }
 }
