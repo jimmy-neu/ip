@@ -23,11 +23,12 @@ public class Ui {
     }
 
     public String showLoadingError() {
-        return "OOPS!! I tried to load your file but failed. Starting with an empty list.";
+        // Ninja-themed loading error
+        return "Nani?! I tried to unroll your mission scrolls but failed. Starting with an empty scroll.";
     }
 
     public String showError(String message) {
-        return "OOPS There is an error!! " + message;
+        return message;
     }
 
     public String showMessage(String message) {

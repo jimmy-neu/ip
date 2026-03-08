@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
             return "Noted. I've removed this jutsu:\n  " + removed +
                     "\nNow you have " + tasks.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException e) {
-            throw new ChatBoxException("Invalid task number.");
+            throw new ChatBoxException("Nani?! That mission number doesn't exist in our records!");
         }
     }
 }

@@ -56,7 +56,7 @@ public class DialogBox extends HBox {
         db.flip();
 
         // Bot bubble: Differentiate normal messages from errors
-        if (text.startsWith("OOPS")) {
+        if (text.startsWith("Nani?!")) {
             // Error bubble: Light red background with dark red text
             db.dialog.setStyle("-fx-background-color: #FFCCCC; -fx-text-fill: #900000; -fx-background-radius: 15; -fx-padding: 10;");
         } else {

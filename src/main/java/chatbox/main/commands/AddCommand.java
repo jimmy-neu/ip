@@ -29,7 +29,7 @@ public class AddCommand extends Command {
 
         // C-DetectDuplicates Feature
         if (tasks.hasDuplicate(task)) {
-            throw new ChatBoxException("OOPS! You already have this exact task in your list.");
+            throw new ChatBoxException("Nani?! You already have this exact jutsu in your scroll.");
         }
 
         tasks.add(task);

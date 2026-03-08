@@ -43,7 +43,7 @@ public class MarkCommand extends Command {
                 return "OK take your time, I've marked this task as not done yet:\n  " + task;
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new ChatBoxException("Invalid task number. Could you check the list again?");
+            throw new ChatBoxException("Nani?! I can't find that mission number. Check your scroll again!");
         }
     }
 }
