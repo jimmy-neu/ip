@@ -32,7 +32,7 @@ public class ParserTest {
             Parser.parse("todo");
             fail(); // The test should fail if the line above didn't throw an error
         } catch (ChatBoxException e) {
-            assertEquals("The description of a todo cannot be empty.", e.getMessage());
+            assertEquals("Nani?! The description of a D-Rank mission (todo) cannot be empty!", e.getMessage());
         }
     }
 }
