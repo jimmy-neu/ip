@@ -10,6 +10,11 @@ import chatbox.main.tasks.TaskList;
 public class DeleteCommand extends Command {
     private final int index;
 
+    /**
+     * Creates a DeleteCommand targeting the given index.
+     *
+     * @param index The zero-based task index to delete.
+     */
     public DeleteCommand(int index) {
         this.index = index;
     }

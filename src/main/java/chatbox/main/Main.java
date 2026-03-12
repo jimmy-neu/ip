@@ -12,6 +12,12 @@ import java.io.IOException;
  */
 public class Main extends Application {
     private ZhengjunChatbox chatbox = new ZhengjunChatbox();
+
+    /**
+     * Starts the JavaFX application and shows the main window.
+     *
+     * @param stage The primary stage provided by JavaFX.
+     */
     @Override
     public void start(Stage stage) {
         try {

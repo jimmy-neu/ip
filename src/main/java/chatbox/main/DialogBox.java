@@ -14,6 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * Custom dialog box component for user and bot messages.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -44,6 +47,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a dialog box styled for the user.
+     *
+     * @param text The message text.
+     * @param img The avatar image.
+     * @return A styled DialogBox.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         // User bubble: Light blue background, rounded corners, padding
@@ -51,6 +61,13 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Creates a dialog box styled for the bot.
+     *
+     * @param text The message text.
+     * @param img The avatar image.
+     * @return A styled DialogBox.
+     */
     public static DialogBox getZhengjunDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

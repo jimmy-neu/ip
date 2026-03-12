@@ -13,12 +13,18 @@ public class ZhengjunChatbox {
     private TaskList tasks;
     private Ui ui;
 
-    // Default constructor for GUI
+    /**
+     * Creates a chatbox instance using the default save file.
+     */
     public ZhengjunChatbox() {
         this("data/ChatboxMemory.txt");
     }
 
-    // Sets up the tools and tries to load the save file
+    /**
+     * Creates a chatbox instance with a custom save file path.
+     *
+     * @param filePath The save file path to use.
+     */
     public ZhengjunChatbox(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -30,9 +36,21 @@ public class ZhengjunChatbox {
         }
     }
 
+    /**
+     * Returns the welcome message.
+     *
+     * @return The welcome message string.
+     */
     public String getWelcome() {
         return ui.showWelcome();
     }
+
+    /**
+     * Processes user input and returns a response message.
+     *
+     * @param input The raw user input string.
+     * @return The response message to display.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

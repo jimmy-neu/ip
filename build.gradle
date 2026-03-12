@@ -9,6 +9,10 @@ repositories {
     mavenCentral()
 }
 
+configurations {
+    winRuntime
+}
+
 javafx {
     version = '21.0.1'
     modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics']
@@ -21,6 +25,7 @@ application {
 shadowJar {
     archiveBaseName = "zhengjun-chatbox"
     archiveClassifier = null
+    configurations = [project.configurations.runtimeClasspath, project.configurations.winRuntime]
 }
 
 java {
@@ -36,23 +41,12 @@ dependencies {
     String junitVersion = '5.10.0'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: junitVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: junitVersion
-    String javaFxVersion = '17.0.7'
 
-    implementation "org.openjfx:javafx-base:${javaFxVersion}:win"
-    implementation "org.openjfx:javafx-base:${javaFxVersion}:mac"
-    implementation "org.openjfx:javafx-base:${javaFxVersion}:linux"
-
-    implementation "org.openjfx:javafx-controls:${javaFxVersion}:win"
-    implementation "org.openjfx:javafx-controls:${javaFxVersion}:mac"
-    implementation "org.openjfx:javafx-controls:${javaFxVersion}:linux"
-
-    implementation "org.openjfx:javafx-fxml:${javaFxVersion}:win"
-    implementation "org.openjfx:javafx-fxml:${javaFxVersion}:mac"
-    implementation "org.openjfx:javafx-fxml:${javaFxVersion}:linux"
-
-    implementation "org.openjfx:javafx-graphics:${javaFxVersion}:win"
-    implementation "org.openjfx:javafx-graphics:${javaFxVersion}:mac"
-    implementation "org.openjfx:javafx-graphics:${javaFxVersion}:linux"
+    String javaFxVersion = '21.0.1'
+    winRuntime "org.openjfx:javafx-base:${javaFxVersion}:win"
+    winRuntime "org.openjfx:javafx-controls:${javaFxVersion}:win"
+    winRuntime "org.openjfx:javafx-fxml:${javaFxVersion}:win"
+    winRuntime "org.openjfx:javafx-graphics:${javaFxVersion}:win"
 }
 
 test {

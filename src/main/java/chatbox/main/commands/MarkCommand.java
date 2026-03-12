@@ -24,6 +24,15 @@ public class MarkCommand extends Command {
         this.isMarked = isMarked;
     }
 
+    /**
+     * Executes the mark/unmark command on the specified task.
+     *
+     * @param tasks The task list to modify.
+     * @param ui The user interface instance (not used in this command).
+     * @param storage The storage instance to persist changes.
+     * @return A confirmation message reflecting the updated state.
+     * @throws ChatBoxException If the task index is invalid.
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws ChatBoxException {
         try {

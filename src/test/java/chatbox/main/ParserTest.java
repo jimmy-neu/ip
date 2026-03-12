@@ -6,8 +6,8 @@ import chatbox.main.commands.ExitCommand;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
 
@@ -28,11 +28,20 @@ public class ParserTest {
     // Negative Test Case: Verifies that empty todo throws an exception
     @Test
     public void parse_emptyTodo_exceptionThrown() {
-        try {
-            Parser.parse("todo");
-            fail(); // The test should fail if the line above didn't throw an error
-        } catch (ChatBoxException e) {
-            assertEquals("Nani?! The description of a D-Rank mission (todo) cannot be empty!", e.getMessage());
-        }
+        ChatBoxException e = assertThrows(ChatBoxException.class, () -> Parser.parse("todo"));
+        assertEquals("Nani?! The description of a D-Rank mission (todo) cannot be empty!", e.getMessage());
+    }
+
+    // Positive Test Case: Verifies that "deadline" returns an AddCommand
+    @Test
+    public void parse_deadlineCommand_success() throws Exception {
+        Command c = Parser.parse("deadline submit report /by 2/12/2019 1800");
+        assertTrue(c instanceof AddCommand);
+    }
+
+    // Negative Test Case: Verifies that an unknown command throws an exception
+    @Test
+    public void parse_unknownCommand_exceptionThrown() {
+        assertThrows(ChatBoxException.class, () -> Parser.parse("dance"));
     }
 }

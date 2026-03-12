@@ -10,6 +10,11 @@ import chatbox.main.tasks.TaskList;
 public class AddCommand extends Command {
     private final Task task;
 
+    /**
+     * Creates an AddCommand for the given task.
+     *
+     * @param task The task to add.
+     */
     public AddCommand(Task task) {
         this.task = task;
     }

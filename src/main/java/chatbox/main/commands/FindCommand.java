@@ -10,6 +10,11 @@ import chatbox.main.tasks.TaskList;
 public class FindCommand extends Command {
     private String keyword;
 
+    /**
+     * Creates a FindCommand for the given keyword.
+     *
+     * @param keyword The keyword to search for.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }

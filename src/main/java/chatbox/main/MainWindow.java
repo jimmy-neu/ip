@@ -11,6 +11,9 @@ import javafx.application.Platform;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 
+/**
+ * Controller for the main chat window.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -26,6 +29,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image zhengjunImage = new Image(this.getClass().getResourceAsStream("/images/bot.png"));
 
+    /**
+     * Initializes UI bindings and background styling after FXML loads.
+     */
     @FXML
     public void initialize() {
         // Auto-scrolls perfectly to the bottom
@@ -40,6 +46,11 @@ public class MainWindow extends AnchorPane {
         dialogContainer.minHeightProperty().bind(scrollPane.heightProperty());
     }
 
+    /**
+     * Injects the main chat logic instance and shows the welcome message.
+     *
+     * @param d The chatbox logic instance.
+     */
     public void setZhengjun(ZhengjunChatbox d) {
         chatbox = d;
         dialogContainer.getChildren().add(
